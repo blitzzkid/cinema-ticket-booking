@@ -1,4 +1,5 @@
 import React from "react";
+import emailjs from "emailjs-com";
 import { createNewBooking } from "../../api/api";
 class TicketBookingForm extends React.Component {
   constructor() {
@@ -24,6 +25,21 @@ class TicketBookingForm extends React.Component {
   onFormSubmit = async event => {
     try {
       event.preventDefault();
+      // emailjs
+      //   .sendForm(
+      //     process.env.REACT_APP_EMAIL_SERVICE_ID,
+      //     process.env.REACT_APP_EMAIL_TEMPLATE_ID,
+      //     event.target,
+      //     process.env.REACT_APP_EMAIL_USER_ID
+      //   )
+      //   .then(
+      //     result => {
+      //       console.log(result.text);
+      //     },
+      //     error => {
+      //       console.log(error.text);
+      //     }
+      //   );
       const data = {
         customerName: this.state.customerName,
         customerEmail: this.state.customerEmail
