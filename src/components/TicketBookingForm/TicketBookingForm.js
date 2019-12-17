@@ -1,5 +1,5 @@
 import React from "react";
-import emailjs from "emailjs-com";
+// import emailjs from "emailjs-com";
 import { createNewBooking } from "../../api/api";
 class TicketBookingForm extends React.Component {
   constructor() {
