@@ -7,17 +7,21 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      selectedSeats: []
+      selectedSeats: [],
+      selectedSeatsId: []
     };
   }
 
-  handleSeatSelected = seatNumber => {
+  handleSeatSelected = (seatNumber, seatId) => {
     const seatsSelected = this.state.selectedSeats;
+    const seatsSelectedId = this.state.selectedSeatsId;
     if (!seatsSelected.includes(seatNumber)) {
       seatsSelected.push(seatNumber);
+      seatsSelectedId.push(seatId);
     }
     this.setState({
-      selectedSeats: seatsSelected
+      selectedSeats: seatsSelected,
+      selectedSeatsId: seatsSelectedId
     });
   };
 
@@ -28,7 +32,10 @@ class App extends React.Component {
           handleSeatSelected={this.handleSeatSelected}
           selectedSeats={this.state.selectedSeats}
         />
-        <TicketBookingForm />
+        <TicketBookingForm
+          selectedSeats={this.state.selectedSeats}
+          selectedSeatsId={this.state.selectedSeatsId}
+        />
       </div>
     );
   }

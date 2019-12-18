@@ -43,7 +43,7 @@ class SeatSelection extends React.Component {
         });
       }
     } else if (seatStatus === "available") {
-      this.props.handleSeatSelected(seatNumber);
+      this.props.handleSeatSelected(seatNumber, seatId);
       await reserveSeat(seatId);
       const updatedSeats = await fetchAllSeats();
       updatedSeats.sort((a, b) => a.seatNumber.localeCompare(b.seatNumber));

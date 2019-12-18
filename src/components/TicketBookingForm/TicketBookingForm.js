@@ -25,7 +25,10 @@ class TicketBookingForm extends React.Component {
   onFormSubmit = async event => {
     try {
       event.preventDefault();
-      await purchaseSeat();
+      if (this.props.selectedSeatsId.length === 0) {
+        throw new Error("No seat was selected");
+      }
+      this.props.selectedSeatsId.forEach(seatId => purchaseSeat(seatId));
       // emailjs
       //   .sendForm(
       //     process.env.REACT_APP_EMAIL_SERVICE_ID,
@@ -54,11 +57,19 @@ class TicketBookingForm extends React.Component {
         submitted: true
       });
     } catch (err) {
-      this.setState({
-        success: false,
-        message: "Unable to make the booking",
-        submitted: true
-      });
+      if (err.message === "No seat was selected") {
+        this.setState({
+          success: false,
+          message: "No seat was selected",
+          submitted: true
+        });
+      } else {
+        this.setState({
+          success: false,
+          message: "Unable to make the booking",
+          submitted: true
+        });
+      }
     }
   };
 
