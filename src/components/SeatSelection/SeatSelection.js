@@ -2,6 +2,7 @@ import React from "react";
 import { fetchAllSeats, reserveSeat, releaseSeat } from "../../api/api";
 import Seat from "../Seat/Seat";
 import "./SeatSelection.css";
+import PropTypes from "prop-types";
 
 class SeatSelection extends React.Component {
   constructor(props) {
@@ -78,5 +79,10 @@ class SeatSelection extends React.Component {
     );
   }
 }
+
+SeatSelection.propTypes = {
+  selectedSeats: PropTypes.array,
+  handleSeatSelected: PropTypes.func
+};
 
 export default SeatSelection;

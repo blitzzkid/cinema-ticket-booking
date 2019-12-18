@@ -4,6 +4,7 @@ import seatReserved from "../../assets/seatReserved.png";
 import seatSold from "../../assets/SeatSold.png";
 import seatReservedSelected from "../../assets/seatReservedSelected.png";
 import "./Seat.css";
+import PropTypes from "prop-types";
 
 const Seat = ({
   seatId,
@@ -40,6 +41,14 @@ const Seat = ({
       <p>{seatNumber}</p>
     </div>
   );
+};
+
+Seat.propTypes = {
+  seatId: PropTypes.string,
+  seatNumber: PropTypes.string,
+  seatStatus: PropTypes.string,
+  handleSeatStatusChange: PropTypes.func,
+  selectedSeats: PropTypes.array
 };
 
 export default Seat;

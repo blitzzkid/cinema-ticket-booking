@@ -1,6 +1,7 @@
 import React from "react";
 // import emailjs from "emailjs-com";
 import { createNewBooking, purchaseSeat } from "../../api/api";
+import PropTypes from "prop-types";
 class TicketBookingForm extends React.Component {
   constructor() {
     super();
@@ -77,7 +78,7 @@ class TicketBookingForm extends React.Component {
     return (
       <form className="bookingForm" onSubmit={this.onFormSubmit}>
         <div className="bookingForm__div">
-          <h1 className="bookingForm__heading">Book your Seat</h1>
+          <h1 className="bookingForm__heading">Purchase your Seat</h1>
           <label>
             Name
             <input
@@ -111,5 +112,9 @@ class TicketBookingForm extends React.Component {
     );
   }
 }
+
+TicketBookingForm.propTypes = {
+  selectedSeatsId: PropTypes.array
+};
 
 export default TicketBookingForm;
