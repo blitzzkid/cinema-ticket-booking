@@ -1,6 +1,6 @@
 import React from "react";
 // import emailjs from "emailjs-com";
-import { createNewBooking } from "../../api/api";
+import { createNewBooking, purchaseSeat } from "../../api/api";
 class TicketBookingForm extends React.Component {
   constructor() {
     super();
@@ -25,6 +25,7 @@ class TicketBookingForm extends React.Component {
   onFormSubmit = async event => {
     try {
       event.preventDefault();
+      await purchaseSeat();
       // emailjs
       //   .sendForm(
       //     process.env.REACT_APP_EMAIL_SERVICE_ID,

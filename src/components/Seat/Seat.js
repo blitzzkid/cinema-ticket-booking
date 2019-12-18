@@ -2,13 +2,23 @@ import React from "react";
 import seatAvailable from "../../assets/seatAvailable.png";
 import seatReserved from "../../assets/seatReserved.png";
 import seatSold from "../../assets/SeatSold.png";
+import seatReservedSelected from "../../assets/seatReservedSelected.png";
 import "./Seat.css";
 
-const Seat = ({ seatNumber, seatStatus }) => {
+const Seat = ({
+  seatId,
+  seatNumber,
+  seatStatus,
+  handleSeatStatusChange,
+  selectedSeats
+}) => {
   return (
     <div
+      onClick={() => handleSeatStatusChange(seatId, seatStatus, seatNumber)}
       className={
-        seatStatus === "reserved"
+        seatStatus === "reserved" && !selectedSeats.includes(seatNumber)
+          ? "seat__reserved"
+          : seatStatus === "reserved" && selectedSeats.includes(seatNumber)
           ? "seat__reserved"
           : seatStatus === "sold"
           ? "seat__sold"
@@ -17,8 +27,10 @@ const Seat = ({ seatNumber, seatStatus }) => {
     >
       <img
         src={
-          seatStatus === "reserved"
+          seatStatus === "reserved" && !selectedSeats.includes(seatNumber)
             ? seatReserved
+            : seatStatus === "reserved" && selectedSeats.includes(seatNumber)
+            ? seatReservedSelected
             : seatStatus === "sold"
             ? seatSold
             : seatAvailable

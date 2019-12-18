@@ -5,6 +5,7 @@
 .seat__reserved img {
   width: 100px;
 }
+
 .seat__sold img {
   width: 100px;
 }
@@ -16,6 +17,7 @@
 .seat__reserved {
   color: #4a8523;
 }
+
 .seat__sold {
   color: #be5108;
 }
