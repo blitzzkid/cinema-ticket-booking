@@ -1,4 +1,8 @@
 import React from "react";
+import seatAvailable from "../../assets/seatAvailable.png";
+import seatReserved from "../../assets/seatReserved.png";
+import seatSold from "../../assets/SeatSold.png";
+import "./Seat.css";
 
 const Seat = ({ seatNumber, seatStatus }) => {
   return (
@@ -11,7 +15,16 @@ const Seat = ({ seatNumber, seatStatus }) => {
           : "seat__available"
       }
     >
-      <img src="../../assets/seat.png" alt="cinema-seat" />
+      <img
+        src={
+          seatStatus === "reserved"
+            ? seatReserved
+            : seatStatus === "sold"
+            ? seatSold
+            : seatAvailable
+        }
+        alt="cinema-seat"
+      ></img>
       <p>{seatNumber}</p>
     </div>
   );

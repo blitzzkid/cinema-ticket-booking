@@ -1,0 +1,21 @@
+.seat__available img {
+  width: 100px;
+}
+
+.seat__reserved img {
+  width: 100px;
+}
+.seat__sold img {
+  width: 100px;
+}
+
+.seat__available {
+  color: #2e6ca4;
+}
+
+.seat__reserved {
+  color: #4a8523;
+}
+.seat__sold {
+  color: #be5108;
+}
