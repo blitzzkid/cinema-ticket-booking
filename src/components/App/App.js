@@ -106,7 +106,6 @@ class App extends React.Component {
       return (
         <div>
           <TicketBookingForm
-            selectedSeats={this.state.selectedSeats}
             selectedSeatsId={this.state.selectedSeatsId}
             handleReselectSeats={this.handleReselectSeats}
           />
