@@ -17,9 +17,7 @@ const Seat = ({
     <div
       onClick={() => handleSeatStatusChange(seatId, seatStatus, seatNumber)}
       className={
-        seatStatus === "reserved" && !selectedSeats.includes(seatNumber)
-          ? "seat__reserved"
-          : seatStatus === "reserved" && selectedSeats.includes(seatNumber)
+        seatStatus === "reserved"
           ? "seat__reserved"
           : seatStatus === "sold"
           ? "seat__sold"

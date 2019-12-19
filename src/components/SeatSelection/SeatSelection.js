@@ -1,5 +1,5 @@
 import React from "react";
-import { fetchAllSeats, reserveSeat, releaseSeat } from "../../api/api";
+import { reserveSeat, releaseSeat } from "../../api/api";
 import Seat from "../Seat/Seat";
 import "./SeatSelection.css";
 import PropTypes from "prop-types";
@@ -8,21 +8,9 @@ class SeatSelection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      seats: [],
       message: ""
     };
   }
-  componentDidMount = async () => {
-    try {
-      const allSeats = await fetchAllSeats();
-      allSeats.sort((a, b) => a.seatNumber.localeCompare(b.seatNumber));
-      this.setState({
-        seats: allSeats
-      });
-    } catch (err) {
-      return err.message;
-    }
-  };
 
   handleSeatStatusChange = async (seatId, seatStatus, seatNumber) => {
     if (seatStatus === "sold") {
@@ -36,24 +24,22 @@ class SeatSelection extends React.Component {
         });
       } else if (this.props.selectedSeats.includes(seatNumber)) {
         await releaseSeat(seatId);
-        const updatedSeats = await fetchAllSeats();
-        updatedSeats.sort((a, b) => a.seatNumber.localeCompare(b.seatNumber));
+        this.props.handleSeatUnselected(seatNumber, seatId);
         this.setState({
-          message: "",
-          seats: updatedSeats
+          message: ""
         });
       }
     } else if (seatStatus === "available") {
-      this.props.handleSeatSelected(seatNumber, seatId);
       await reserveSeat(seatId);
-      const updatedSeats = await fetchAllSeats();
-      updatedSeats.sort((a, b) => a.seatNumber.localeCompare(b.seatNumber));
+      this.props.handleSeatSelected(seatNumber, seatId);
       this.setState({
-        message:
-          "You have reserved the selected seat(s), please make a booking",
-        seats: updatedSeats
+        message: "You have reserved the selected seat(s), please make a booking"
       });
     }
+  };
+
+  onSeatsReserved = () => {
+    this.props.handleSeatReserved();
   };
 
   render() {
@@ -61,13 +47,13 @@ class SeatSelection extends React.Component {
       <div>
         <div>Screen</div>
         <div className="seatSelection__list">
-          {this.state.seats.map(seat => {
+          {this.props.allSeats.map(seat => {
             return (
               <Seat
+                key={seat._id}
                 seatId={seat._id}
                 seatNumber={seat.seatNumber}
                 seatStatus={seat.status}
-                key={seat._id}
                 handleSeatStatusChange={this.handleSeatStatusChange}
                 selectedSeats={this.props.selectedSeats}
               />
@@ -75,14 +61,24 @@ class SeatSelection extends React.Component {
           })}
         </div>
         {this.state.message}
+        <button
+          className="seatSelection__reserveButton"
+          type="button"
+          onClick={this.onSeatsReserved}
+        >
+          Book seats
+        </button>
       </div>
     );
   }
 }
 
 SeatSelection.propTypes = {
+  allSeats: PropTypes.array,
   selectedSeats: PropTypes.array,
-  handleSeatSelected: PropTypes.func
+  handleSeatSelected: PropTypes.func,
+  handleSeatUnselected: PropTypes.func,
+  handleSeatReserved: PropTypes.func
 };
 
 export default SeatSelection;

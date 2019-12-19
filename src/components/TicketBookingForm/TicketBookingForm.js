@@ -1,6 +1,6 @@
 import React from "react";
 // import emailjs from "emailjs-com";
-import { createNewBooking, purchaseSeat } from "../../api/api";
+import { createNewBooking, purchaseSeat, releaseSeat } from "../../api/api";
 import PropTypes from "prop-types";
 class TicketBookingForm extends React.Component {
   constructor() {
@@ -26,9 +26,6 @@ class TicketBookingForm extends React.Component {
   onFormSubmit = async event => {
     try {
       event.preventDefault();
-      if (this.props.selectedSeatsId.length === 0) {
-        throw new Error("No seat was selected");
-      }
       this.props.selectedSeatsId.forEach(seatId => purchaseSeat(seatId));
       // emailjs
       //   .sendForm(
@@ -58,63 +55,70 @@ class TicketBookingForm extends React.Component {
         submitted: true
       });
     } catch (err) {
-      if (err.message === "No seat was selected") {
-        this.setState({
-          success: false,
-          message: "No seat was selected",
-          submitted: true
-        });
-      } else {
-        this.setState({
-          success: false,
-          message: "Unable to make the booking",
-          submitted: true
-        });
-      }
+      this.setState({
+        success: false,
+        message: "Unable to make the booking",
+        submitted: true
+      });
     }
+  };
+
+  onReselectSeats = () => {
+    this.props.selectedSeatsId.forEach(seatId => releaseSeat(seatId));
+    this.props.handleReselectSeats();
   };
 
   render() {
     return (
-      <form className="bookingForm" onSubmit={this.onFormSubmit}>
-        <div className="bookingForm__div">
-          <h1 className="bookingForm__heading">Purchase your Seat</h1>
-          <label>
-            Name
+      <div>
+        <form className="bookingForm" onSubmit={this.onFormSubmit}>
+          <div className="bookingForm__div">
+            <h1 className="bookingForm__heading">Purchase your Seat</h1>
+            <label>
+              Name
+              <input
+                className="input__text"
+                type="text"
+                aria-label="customer-name"
+                name="customerName"
+                value={this.state.customerName}
+                onChange={this.handleInputChange}
+              ></input>
+            </label>
+            <label>
+              Email
+              <input
+                className="input__text"
+                type="text"
+                aria-label="customer-email"
+                name="customerEmail"
+                value={this.state.customerEmail}
+                onChange={this.handleInputChange}
+              ></input>
+            </label>
             <input
-              className="input__text"
-              type="text"
-              aria-label="customer-name"
-              name="customerName"
-              value={this.state.customerName}
-              onChange={this.handleInputChange}
-            ></input>
-          </label>
-          <label>
-            Email
-            <input
-              className="input__text"
-              type="text"
-              aria-label="customer-email"
-              name="customerEmail"
-              value={this.state.customerEmail}
-              onChange={this.handleInputChange}
-            ></input>
-          </label>
-          <input
-            className="bookingForm__bookButton"
-            value="Book"
-            type="submit"
-          />
-          {this.state.submitted ? <p>{this.state.message}</p> : ""}
-        </div>
-      </form>
+              className="bookingForm__bookButton"
+              value="Book"
+              type="submit"
+            />
+            {this.state.submitted ? <p>{this.state.message}</p> : ""}
+          </div>
+        </form>
+        <button
+          className="seatSelection__reselectButton"
+          type="button"
+          onClick={this.onReselectSeats}
+        >
+          Reselect seats
+        </button>
+      </div>
     );
   }
 }
 
 TicketBookingForm.propTypes = {
-  selectedSeatsId: PropTypes.array
+  selectedSeatsId: PropTypes.array,
+  handleReselectSeats: PropTypes.func
 };
 
 export default TicketBookingForm;
