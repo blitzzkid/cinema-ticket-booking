@@ -44,8 +44,8 @@ class SeatSelection extends React.Component {
 
   render() {
     return (
-      <div>
-        <div>Screen</div>
+      <div className="seatSelection__container">
+        <h1 className="seatSelection__heading">Screen</h1>
         <div className="seatSelection__list">
           {this.props.allSeats.map(seat => {
             return (
@@ -60,7 +60,7 @@ class SeatSelection extends React.Component {
             );
           })}
         </div>
-        {this.state.message}
+        <div className="seatSelection__message">{this.state.message}</div>
         <button
           className="seatSelection__reserveButton"
           type="button"

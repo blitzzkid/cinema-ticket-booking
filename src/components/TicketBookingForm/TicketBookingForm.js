@@ -2,6 +2,7 @@ import React from "react";
 // import emailjs from "emailjs-com";
 import { createNewBooking, purchaseSeat, releaseSeat } from "../../api/api";
 import PropTypes from "prop-types";
+import "./TicketBookingForm.css";
 class TicketBookingForm extends React.Component {
   constructor() {
     super();
@@ -74,8 +75,8 @@ class TicketBookingForm extends React.Component {
         <form className="bookingForm" onSubmit={this.onFormSubmit}>
           <div className="bookingForm__div">
             <h1 className="bookingForm__heading">Purchase your Seat</h1>
-            <label>
-              Name
+            <section className="input">
+              <label className="input__label">Name</label>
               <input
                 className="input__text"
                 type="text"
@@ -84,9 +85,9 @@ class TicketBookingForm extends React.Component {
                 value={this.state.customerName}
                 onChange={this.handleInputChange}
               ></input>
-            </label>
-            <label>
-              Email
+            </section>
+            <section className="input">
+              <label className="input__label">Email</label>
               <input
                 className="input__text"
                 type="text"
@@ -95,22 +96,26 @@ class TicketBookingForm extends React.Component {
                 value={this.state.customerEmail}
                 onChange={this.handleInputChange}
               ></input>
-            </label>
-            <input
-              className="bookingForm__bookButton"
-              value="Book"
-              type="submit"
-            />
-            {this.state.submitted ? <p>{this.state.message}</p> : ""}
+            </section>
+            <div className="bookingForm__buttons">
+              <input
+                className="bookingForm__bookButton"
+                value="Book"
+                type="submit"
+              />
+              <button
+                className="bookingForm__reselectButton"
+                type="button"
+                onClick={this.onReselectSeats}
+              >
+                Reselect seats
+              </button>
+            </div>
+            <div className="bookingForm__message">
+              {this.state.submitted ? <p>{this.state.message}</p> : ""}
+            </div>
           </div>
         </form>
-        <button
-          className="seatSelection__reselectButton"
-          type="button"
-          onClick={this.onReselectSeats}
-        >
-          Reselect seats
-        </button>
       </div>
     );
   }

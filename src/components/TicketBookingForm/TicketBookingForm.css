@@ -1,0 +1,99 @@
+.input {
+  display: flex;
+  flex-direction: column;
+}
+
+.input__label {
+  display: block;
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.input__text {
+  height: 40px;
+  width: 50rem;
+  border-color: #f7f8fc;
+  font-size: 1.8rem;
+  outline: none;
+  border: 1px solid #e4e5ea;
+  font-family: Varela Round;
+  margin-bottom: 1rem;
+  padding: 5px 30px;
+  font-family: Open Sans;
+}
+
+.bookingForm__div {
+  display: flex;
+  flex-direction: column;
+  margin-left: 60px;
+}
+
+.bookingForm__heading {
+  font-size: 36px;
+  line-height: 43px;
+  font-weight: 600;
+}
+
+.bookingForm__buttons {
+  display: flex;
+  flex-direction: row;
+  margin-top: 3%;
+}
+
+.bookingForm__message {
+  margin-bottom: 3%;
+}
+
+.bookingForm__bookButton {
+  box-shadow: 0px 10px 14px -7px #276873;
+  background: linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
+  background-color: #599bb3;
+  border-radius: 8px;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 13px 32px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #3d768a;
+  width: 150px;
+  margin-right: 5%;
+}
+.bookingForm__bookButton:hover {
+  background: linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
+  background-color: #408c99;
+}
+.bookingForm__bookButton:active {
+  position: relative;
+  top: 1px;
+}
+
+.bookingForm__reselectButton {
+  box-shadow: 0px 10px 14px -7px #9fb4f2;
+  background: linear-gradient(to bottom, #7892c2 5%, #476e9e 100%);
+  background-color: #7892c2;
+  border-radius: 8px;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 13px 32px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #293966;
+  width: 210px;
+}
+.bookingForm__reselectButton:hover {
+  background: linear-gradient(to bottom, #476e9e 5%, #7892c2 100%);
+  background-color: #476e9e;
+}
+
+.bookingForm__reselectButton:active {
+  position: relative;
+  top: 1px;
+}
