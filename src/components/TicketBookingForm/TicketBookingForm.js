@@ -65,8 +65,12 @@ class TicketBookingForm extends React.Component {
   };
 
   onReselectSeats = () => {
-    this.props.selectedSeatsId.forEach(seatId => releaseSeat(seatId));
-    this.props.handleReselectSeats();
+    if (!this.state.success) {
+      this.props.selectedSeatsId.forEach(seatId => releaseSeat(seatId));
+      this.props.handleReselectSeats();
+    } else {
+      this.props.handleReselectSeats();
+    }
   };
 
   render() {
