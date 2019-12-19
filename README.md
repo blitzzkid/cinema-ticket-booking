@@ -1,3 +1,7 @@
+## About the app
+
+This app has been deployed with circleci for continous integration/continous delivery
+
 ## Installing required dependencies
 
 To install the app, you would require the following dependencies:
