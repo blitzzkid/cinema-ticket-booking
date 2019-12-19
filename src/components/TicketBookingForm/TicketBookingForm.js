@@ -1,5 +1,5 @@
 import React from "react";
-// import emailjs from "emailjs-com";
+import emailjs from "emailjs-com";
 import { createNewBooking, purchaseSeat, releaseSeat } from "../../api/api";
 import PropTypes from "prop-types";
 import "./TicketBookingForm.css";
@@ -28,21 +28,21 @@ class TicketBookingForm extends React.Component {
     try {
       event.preventDefault();
       this.props.selectedSeatsId.forEach(seatId => purchaseSeat(seatId));
-      // emailjs
-      //   .sendForm(
-      //     process.env.REACT_APP_EMAIL_SERVICE_ID,
-      //     process.env.REACT_APP_EMAIL_TEMPLATE_ID,
-      //     event.target,
-      //     process.env.REACT_APP_EMAIL_USER_ID
-      //   )
-      //   .then(
-      //     result => {
-      //       console.log(result.text);
-      //     },
-      //     error => {
-      //       console.log(error.text);
-      //     }
-      //   );
+      emailjs
+        .sendForm(
+          process.env.REACT_APP_EMAIL_SERVICE_ID,
+          process.env.REACT_APP_EMAIL_TEMPLATE_ID,
+          event.target,
+          process.env.REACT_APP_EMAIL_USER_ID
+        )
+        .then(
+          result => {
+            console.log(result.text);
+          },
+          error => {
+            console.log(error.text);
+          }
+        );
       const data = {
         customerName: this.state.customerName,
         customerEmail: this.state.customerEmail
